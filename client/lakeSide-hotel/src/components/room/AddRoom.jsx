@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {addRoom} from '../utils/ApiFunction'
 import RoomTypeSelector from "../common/RoomTypeSelector";
+import { Link } from "react-router-dom";
 
 const AddRoom = () => {
   const [newRoom, setNewRoom] = useState({
@@ -36,7 +37,7 @@ const AddRoom = () => {
     try {
         const success = await addRoom(newRoom.photo, newRoom.roomType, newRoom.roomPrice)
         if(success !== undefined) {
-            setSuccessMessage("A new room was added to the database")
+            setSuccessMessage("A new room was added successfully!")
             setNewRoom({
                 photo: null,
                 roomType: "",
@@ -121,6 +122,9 @@ const AddRoom = () => {
                         )}
                     </div>
                     <div className="d-grid d-md-flex mt-2">
+                        <Link to={"/existing-rooms"} className="btn btn-outline-info">
+                            Back
+                        </Link>
                         <button className="btn btn-outline-primary ml-5">
                             Save Room
                         </button>
