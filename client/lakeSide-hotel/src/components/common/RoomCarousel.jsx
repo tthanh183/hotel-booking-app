@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import {Link} from 'react-dom'
-import {getAllRooms} from '../utils/ApiFunctions'
-import { Carousel, Container } from 'react-bootstrap'
+import React, { useEffect, useState } from "react"
+import { getAllRooms } from "../utils/ApiFunctions"
+import { Link } from "react-router-dom"
+import { Card, Carousel, Col, Container, Row } from "react-bootstrap"
 const RoomCarousel = () => {
-    const [rooms, setRooms] = useState([])
+    const [rooms, setRooms] = useState([{id:"", roomType:"", roomPrice:"", photo:""}])
     const [errorMessage, setErrorMessage] = useState("")
     const [isLoading, setIsLoading] = useState(false)
 
@@ -38,6 +38,28 @@ const RoomCarousel = () => {
                         <Row>
                             {rooms.slice(index * 4, index * 4 + 4).map((room) => (
                                 <Col key={room.id} className>
+                                    <Card>
+                                        <Link to={`/book-rooms/${room.id}`}>
+                                            <Card.Img
+                                            variant = "top"
+                                            src={`data:image/png;base64, ${room.photo}`}
+                                            alt="Room photo"
+                                            className="w-100"
+                                            style={{height: "200px"}}
+                                            >
+
+                                            </Card.Img>
+                                        </Link>
+                                        <Card.Body>
+                                        <Card.Title className="hotel-color">{room.roomType}</Card.Title>
+												<Card.Title className="room-price">${room.roomPrice}/night</Card.Title>
+												<div className="flex-shrink-0">
+													<Link to={`/book-room/${room.id}`} className="btn btn-hotel btn-sm">
+														Book Now
+													</Link>
+												</div>
+                                        </Card.Body>
+                                    </Card>
                                 </Col>
                             ))}  
                         </Row>        
