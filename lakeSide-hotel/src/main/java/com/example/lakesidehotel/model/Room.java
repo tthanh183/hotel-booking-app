@@ -33,8 +33,8 @@ public class Room {
         this.bookings = new ArrayList<>();
     }
 
-    public void addBookingRoom(BookedRoom booking) {
-        if(bookings == null) {
+    public void addBooking(BookedRoom booking){
+        if (bookings == null){
             bookings = new ArrayList<>();
         }
         bookings.add(booking);

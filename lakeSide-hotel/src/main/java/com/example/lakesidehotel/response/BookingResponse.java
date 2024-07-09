@@ -37,4 +37,5 @@ public class BookingResponse {
         this.checkOutDate = checkOutDate;
         this.bookingConfirmationCode = bookingConfirmationCode;
     }
+
 }
