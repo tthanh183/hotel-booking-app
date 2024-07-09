@@ -81,6 +81,7 @@ export async function bookRoom(roomId, booking) {
 export async function getAllBookings() {
     try {
         const result = await api.get("/bookings/all-bookings")
+        console.log(result.data);
         return result.data
     } catch (error) {
         throw new Error(`Error fetching bookings: ${error.message}`)
@@ -89,8 +90,8 @@ export async function getAllBookings() {
 
 export async function getBookingByConfirmationCode(confirmationCode) {
     try {
-        const result = await api.get(`bookings/confirmation/${confirmationCode}`)
-        return result.data
+        const result = await api.get(`/bookings/confirmation/${confirmationCode}`)
+		return result.data
     } catch (error) {
         if(error.response && error.response.data) {
             throw new Error(error.response.data)

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@CrossOrigin("*")
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/bookings")
@@ -37,7 +38,7 @@ public class BookingController {
         return ResponseEntity.ok(bookingResponses);
     }
 
-    @GetMapping("/confirmaton/{confirmationCode}")
+    @GetMapping("/confirmation/{confirmationCode}")
     public ResponseEntity<?> getBookingByConfirmationCode(@PathVariable String confirmationCode) {
         try {
             BookedRoom booking = bookingService.findByBookingConfirmationCode(confirmationCode);
@@ -64,8 +65,11 @@ public class BookingController {
     }
 
     private BookingResponse getBookingResponse(BookedRoom booking) {
-        Room theRoom = roomService.getRoomById(booking.getBookingId()).get();
-        RoomResponse room = new RoomResponse(theRoom.getId(), theRoom.getRoomType(), theRoom.getRoomPrice());
+        Room theRoom = roomService.getRoomById(booking.getRoom().getId()).get();
+        RoomResponse room = new RoomResponse(
+                theRoom.getId(),
+                theRoom.getRoomType(),
+                theRoom.getRoomPrice());
         return new BookingResponse(
                 booking.getBookingId(), booking.getCheckInDate(),
                 booking.getCheckOutDate(),booking.getGuestFullName(),
